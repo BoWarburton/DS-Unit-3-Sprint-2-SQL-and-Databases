@@ -14,17 +14,27 @@ rpg_characters = sl_curs.execute(get_rpg_characters).fetchall()
 # print(characters[:10])
 # print(len(characters[0]))
 
-# Step 2 - Loop through character list, inserting into Mongo
+# Step 2 - Loop through character list making Mongo docs
 
-rpg_doc = {
-    'doc_type': 'rpg_character',
-    'sql_key': rpg_character[0],
-    'name': rpg_character[1],
-    'level': rpg_character[2],
-    'exp': rpg_character[3],
-    'hp': rpg_character[4],
-    'strength': rpg_character[5],
-    'intelligence': rpg_character[6],
-    'dexterity': rpg_character[7],
-    'wisdom': rpg_character[8]
-}
+rpg_docs = []
+for i in range(len(rpg_characters)):
+    doc = {'doc_type': 'rpg_characters',
+           'sql_key': rpg_characters[i][0],
+           'name': rpg_characters[i][1],
+           'level': rpg_characters[i][2],
+           'exp': rpg_characters[i][3],
+           'hp': rpg_characters[i][4],
+           'strength': rpg_characters[i][5],
+           'intelligence': rpg_characters[i][6],
+           'dexterity': rpg_characters[i][7],
+           'wisdom': rpg_characters[i][8]
+          }
+    rpg_docs.append(doc)
+
+# print(rpg_docs[:5])
+
+# Step 3 - Insert
+import pymongo
+client = pymongo.MongoClient("mongodb+srv://dbUser:JUMtzB8KouztbNH8z@cluster0.jgkc5.mongodb.net/test?retryWrites=true&w=majority")
+db = client.test
+db.test.insert_many(rpg_docs)
