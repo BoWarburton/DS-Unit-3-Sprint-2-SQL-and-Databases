@@ -35,6 +35,6 @@ for i in range(len(rpg_characters)):
 
 # Step 3 - Insert
 import pymongo
-client = pymongo.MongoClient("mongodb+srv://dbUser:JUMtzB8KouztbNH8z@cluster0.jgkc5.mongodb.net/test?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://dbUser:xxxxxxxx@cluster0.jgkc5.mongodb.net/test?retryWrites=true&w=majority")
 db = client.test
 db.test.insert_many(rpg_docs)
