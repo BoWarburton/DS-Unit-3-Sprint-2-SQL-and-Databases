@@ -5,6 +5,10 @@ from psycopg2.extensions import register_adapter, AsIs
 # from dotenv import load_dotenv
 import pandas as pd
 import numpy
+from sqlalchemy import create_engine
+
+engine = create_engine('postgres://gdivcpth')
+
 # # Allows access to local .env file (will be GitIgnored)
 # load_dotenv()
 # # Bring in ElephantSQL Database keys
@@ -15,7 +19,7 @@ import numpy
 
 DB_NAME = 'pkyeqwjs'
 DB_USER = 'pkyeqwjs'
-DB_PASS = 'yCST0CUudYye77u_fWs1AJAXufSKUT8A'
+DB_PASS = 'xxxxxxxxxxxx'
 DB_HOST = 'ruby.db.elephantsql.com'
 
 # # Read in the CSV files from GitHub (https://github.com/Lambda-School-Labs/juxta-city-data-ds/tree/heart-disease-data/useful_datasets)

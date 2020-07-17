@@ -5,7 +5,7 @@ import psycopg2
 
 dbname = 'pkyeqwjs'
 user = 'pkyeqwjs'
-password = 'yCST0CUudYye77u_fWs1AJAXufSKUT8A'
+password = 'xxxxxxxxxx'
 host = 'ruby.db.elephantsql.com'
 
 pg_conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host)

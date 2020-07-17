@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "../lambdata"
+		},
+		{
+			"path": "../sql"
+		},
+		{
+			"path": "module1-introduction-to-sql"
+		},
+		{
+			"path": "module2-sql-for-analysis"
+		},
+		{
+			"path": "module3-nosql-and-document-oriented-databases"
+		},
+		{
+			"path": "module4-acid-and-database-scalability-tradeoffs"
+		},
+		{
+			"path": "sprint-challenge-10"
+		},
+		{
+			"path": "review"
+		}
+	],
+	"settings": {}
+}

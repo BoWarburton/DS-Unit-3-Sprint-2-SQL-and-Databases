@@ -35,6 +35,19 @@ has and will continue to be useful across a wide range of situations. It will
 also be the largest part of the sprint challenge, and likely a component of many
 job interviews.
 
+### ACID
+Guarantee validity in transaction paradigm
+#### Atomicity: each transaction is single unit; locks, rollbacks; consistent state (larger atom faster)
+#### Consistency: each transaction results in valid state (constraints, cascades, triggers); prevent corruption
+#### Isolation: concurrency; state reflects as-if sequential
+#### Durability: survive crash
+
+### BASE
+Eventual consistency
+#### Basically Available
+#### Soft consistency
+#### Eventual
+
 ## Assignment
 
 Practice! Go back to both your deployed PostgreSQL (Titanic data) and MongoDB

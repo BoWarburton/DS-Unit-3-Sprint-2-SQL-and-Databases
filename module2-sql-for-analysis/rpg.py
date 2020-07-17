@@ -22,7 +22,7 @@ CREATE TABLE charactercreator_character (
 
 # dbname = 'pkyeqwjs'
 # user = 'pkyeqwjs'
-# password = 'yCST0CUudYye77u_fWs1AJAXufSKUT8A'
+# password = 'xxxxxx'
 # host = 'ruby.db.elephantsql.com'
 
 # pg_conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host)
@@ -46,7 +46,7 @@ CREATE TABLE charactercreator_character (
 # SELECT * FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema'
 # """
 
-# pg_conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host)
+# pg_conn = psycopg2.connect(dbname=dbname, user=user, password=xxxxxxx, host=host)
 
 # pg_curs = pg_conn.cursor()
 # # pg_curs.execute(create_chracter_table)
