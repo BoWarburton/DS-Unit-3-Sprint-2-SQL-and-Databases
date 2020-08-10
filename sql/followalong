@@ -1,0 +1,21 @@
+#!/usr/bin/env Python
+
+import sqlite3
+
+# 1st connect to db
+conn = sqlite3.connect('rpg_db.sqlite3')
+
+# 2nd make a cursor
+cursor = conn.cursor()
+
+# 3rd execute SQL as Python string
+# create_statement = "CREATE TABLE pizza (name varchar(30), size int, pepperoni int, pineapple int);"
+cursor.execute(create_statement)
+
+insert_statement = "INSERT INTO pizza (name, size, pepperoni, pineapple) VALUES ('ellios', 9, 1, 0);"
+
+cursor.execute(insert_statement)
+
+cursor.execute("SELECT * FROM pizza;").fetchall()
+
+cursor.execute("SELECT count(*) FROM charactercreator_character WHERE character_id >= 100")

@@ -23,6 +23,9 @@
 		},
 		{
 			"path": "review"
+		},
+		{
+			"path": "../DS-Unit-3-Sprint-3-Productization-and-Cloud/module1-web-application-development-with-flask"
 		}
 	],
 	"settings": {}

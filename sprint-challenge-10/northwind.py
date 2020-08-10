@@ -63,6 +63,16 @@ product_supplier_list = curs.fetchall()
 for i in range(len(product_supplier_list)):
     print(f'{i+1}: {product_supplier_list[i][0]}, {product_supplier_list[i][1]}')
 
+# Pythonic looping over a list
+print('\n')
+for product, supplier in zip(product_supplier_list, product_supplier_list):
+    print(f'{product[0]}, {supplier[1]}')
+
+print('\n')
+
+for num, product in enumerate(product_supplier_list, start=1):
+    print('{}. {}, {}'.format(num, product[0], product[1]))
+
 # Largest category by unique number of products in it
 largest_category = '''
 SELECT c.CategoryName, COUNT(c.CategoryName)
