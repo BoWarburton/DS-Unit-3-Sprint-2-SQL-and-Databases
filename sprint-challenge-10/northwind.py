@@ -1,4 +1,4 @@
-'''
+"""
 ANSWER: 10 most expensive items per unit price
 1. Cote de Blaye
 2. Thuringer Rostbratwurst
@@ -10,7 +10,7 @@ ANSWER: 10 most expensive items per unit price
 8. Tarte au sucre
 9. Ipoh Coffee
 10. Rossle Sauerkraut
-'''
+"""
 
 '''
 ANSWER average age of employee at time of hiring: 37.2 years old
@@ -52,12 +52,27 @@ for i in range(len(product_list)):
 
 # Average age of employee at time of hiring
 curs.execute('SELECT AVG(HireDate - BirthDate) FROM Employee;')
-print(f'\n Average age at time of hiring: {curs.fetchall()[0][0]}')
+print(f'\n Average age at time of hiring: {curs.fetchall()[0][0]:.2f}')
 
 # (Stretch) average age of employee at hire by city
+average_age_by_city = """
+SELECT AVG(HireDate - BirthDate)
+FROM Employee
+GROUP BY City
+"""
 
 # 10 most expensive items and their suppliers
-curs.execute('SELECT ProductName, CompanyName FROM Product JOIN Supplier ON Product.SupplierId = Supplier.Id ORDER BY UnitPrice DESC LIMIT 10;')
+most_expensive_items_and_suppliers = """
+SELECT ProductName, CompanyName
+FROM Product
+JOIN Supplier
+ON Product.SupplierId = SupplierId
+ORDER BY UnitPrice
+DESC
+LIMIT 10;
+"""
+curs.execute(most_expensive_items_and_suppliers)
+
 print(f'\n 10 most expensive with suppliers')
 product_supplier_list = curs.fetchall()
 for i in range(len(product_supplier_list)):
@@ -65,22 +80,23 @@ for i in range(len(product_supplier_list)):
 
 # Pythonic looping over a list
 print('\n')
+print('...printed Pythonic (?) using zip list')
 for product, supplier in zip(product_supplier_list, product_supplier_list):
     print(f'{product[0]}, {supplier[1]}')
 
 print('\n')
-
+print('...printed using enumerate')
 for num, product in enumerate(product_supplier_list, start=1):
     print('{}. {}, {}'.format(num, product[0], product[1]))
 
 # Largest category by unique number of products in it
-largest_category = '''
+largest_category = """
 SELECT c.CategoryName, COUNT(c.CategoryName)
 FROM Category c, Product p
 WHERE c.Id = p.CategoryId
 GROUP BY 1
 ORDER BY 2 DESC
 ;
-'''
+"""
 curs.execute(largest_category)
-print(f'\n Largest category by unique products: {curs.fetchall()[0][0]}')
+print(f'\n Largest category by unique products: {curs.fetchall()[0][0]}\n')

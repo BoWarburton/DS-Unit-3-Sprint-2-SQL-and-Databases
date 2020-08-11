@@ -7,6 +7,9 @@ import pandas as pd
 import numpy
 from sqlalchemy import create_engine
 
+# create table test_table (id serial primary key, name varchar(40),
+# data jsonb);
+
 engine = create_engine('postgres://gdivcpth')
 
 # # Allows access to local .env file (will be GitIgnored)
@@ -23,7 +26,7 @@ DB_PASS = 'xxxxxxxxxxxx'
 DB_HOST = 'ruby.db.elephantsql.com'
 
 # # Read in the CSV files from GitHub (https://github.com/Lambda-School-Labs/juxta-city-data-ds/tree/heart-disease-data/useful_datasets)
-# heart = pd.read_csv('https://raw.githubusercontent.com/Lambda-School-Labs/juxta-city-data-ds/heart-disease-data/useful_datasets/heart_data.csv')
+heart = pd.read_csv('https://raw.githubusercontent.com/Lambda-School-Labs/juxta-city-data-ds/heart-disease-data/useful_datasets/heart_data.csv')
 # economy = pd.read_csv('https://raw.githubusercontent.com/Lambda-School-Labs/juxta-city-data-ds/heart-disease-data/useful_datasets/economy_data.csv')
 # housing = pd.read_csv('https://raw.githubusercontent.com/Lambda-School-Labs/juxta-city-data-ds/heart-disease-data/useful_datasets/housing_data.csv')
 # job = pd.read_csv('https://github.com/Lambda-School-Labs/juxta-city-data-ds/raw/heart-disease-data/useful_datasets/job_data.csv')
