@@ -3,10 +3,10 @@
 import sqlite3
 import psycopg2
 
-dbname = 'pkyeqwjs'
-user = 'pkyeqwjs'
-password = 'xxxxxxxxxx'
-host = 'ruby.db.elephantsql.com'
+dbname = 'elvrajlo'
+user = 'elvrajlo'
+password = 'Mq4dGr1-4InqYz1NxinWY93fKQ0YMj1'
+host = "otto.db.elephantsql.com"
 
 pg_conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host)
 pg_curs = pg_conn.cursor()

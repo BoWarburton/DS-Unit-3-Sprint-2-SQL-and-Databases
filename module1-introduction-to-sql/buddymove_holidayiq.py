@@ -1,4 +1,5 @@
-#!/usr/bin/env Python
+#!/opt/anaconda3/bin Python
+
 import sqlite3
 import pandas as pd
 

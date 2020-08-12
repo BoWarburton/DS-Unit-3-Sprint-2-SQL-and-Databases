@@ -1,32 +1,31 @@
+#!/opt/anaconda3/bin Python
+
 import os
 import psycopg2
 from psycopg2.extras import execute_values
 from psycopg2.extensions import register_adapter, AsIs
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 import pandas as pd
 import numpy
 from sqlalchemy import create_engine
+from module2.creds import cred
 
-# create table test_table (id serial primary key, name varchar(40),
-# data jsonb);
-
+# From Robert Sharp:
+# titanic = pd.read_csv(url).rename({
+#"column" : "column"
+#})
 engine = create_engine('postgres://gdivcpth')
 
-# # Allows access to local .env file (will be GitIgnored)
-# load_dotenv()
-# # Bring in ElephantSQL Database keys
-# DB_NAME = os.getenv("DB_NAME")
-# DB_HOST = os.getenv("DB_HOST")
-# DB_PASS = os.getenv("DB_PASS")
-# DB_USER = os.getenv("DB_USER")
+# Allows access to local .env file (will be GitIgnored)
+load_dotenv()
+# Bring in ElephantSQL Database keys
+DB_NAME = os.getenv("EL_DB_NAME")
+DB_HOST = os.getenv("EL_DB_HOST")
+DB_PASS = os.getenv("EL_DB_PASS")
+DB_USER = os.getenv("EL_DB_USER")
 
-DB_NAME = 'pkyeqwjs'
-DB_USER = 'pkyeqwjs'
-DB_PASS = 'xxxxxxxxxxxx'
-DB_HOST = 'ruby.db.elephantsql.com'
-
-# # Read in the CSV files from GitHub (https://github.com/Lambda-School-Labs/juxta-city-data-ds/tree/heart-disease-data/useful_datasets)
-heart = pd.read_csv('https://raw.githubusercontent.com/Lambda-School-Labs/juxta-city-data-ds/heart-disease-data/useful_datasets/heart_data.csv')
+# Read in the CSV files from GitHub (https://github.com/Lambda-School-Labs/juxta-city-data-ds/tree/heart-disease-data/useful_datasets)
+# heart = pd.read_csv('https://raw.githubusercontent.com/Lambda-School-Labs/juxta-city-data-ds/heart-disease-data/useful_datasets/heart_data.csv')
 # economy = pd.read_csv('https://raw.githubusercontent.com/Lambda-School-Labs/juxta-city-data-ds/heart-disease-data/useful_datasets/economy_data.csv')
 # housing = pd.read_csv('https://raw.githubusercontent.com/Lambda-School-Labs/juxta-city-data-ds/heart-disease-data/useful_datasets/housing_data.csv')
 # job = pd.read_csv('https://github.com/Lambda-School-Labs/juxta-city-data-ds/raw/heart-disease-data/useful_datasets/job_data.csv')
@@ -39,16 +38,10 @@ df = pd.read_csv('titanic.csv')
 df = df[['Survived', 'Name', 'Sex']].copy()
 
 # Connect to PostgreSQL Database
-# connection = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port="5432")
-# cursor = connection.cursor()
-
 connection = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
 cursor = connection.cursor()
 
-# print(type(pg_curs))
-
 # This block of code is needed so psycopg2 can register numpy types
-# Source: https://rehalcon.blogspot.com/2010/03/sqlalchemy-programmingerror-cant-adapt.html
 def adapt_numpy_float64(numpy_float64):
     return AsIs(numpy_float64)
 def adapt_numpy_int64(numpy_int64):
@@ -134,6 +127,7 @@ CREATE TABLE IF NOT EXISTS titanic (
 
 # Execute data definition language
 cursor.execute(titanic_schema)
+cursor.commit()
 
 # cursor.execute(heart_schema)
 # cursor.execute(economy_schema)
@@ -159,6 +153,10 @@ titanic_insert = """
 INSERT INTO titanic
    (Survived, Name, Sex) VALUES %s
 """
+# execute_values(cursor, """
+# INSERT INTO titanic
+# (Survived, Pclass, Name, Gender, Age
+# [tuple(row) for row in titanic.values])
 
 # heart_insert = '''
 # INSERT INTO heart_disease

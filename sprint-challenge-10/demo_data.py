@@ -1,4 +1,5 @@
-#!/usr/env/bin Python
+#!/opt/anaconda3/bin Python
+
 import sqlite3
 
 # Open connection to new blank database file
