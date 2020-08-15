@@ -1,4 +1,5 @@
 #!/opt/anaconda3/bin Python
+import sqlite3
 
 """
 ANSWER: 10 most expensive items per unit price
@@ -33,11 +34,8 @@ ANSWER 10 most expensive items and suppliers
 '''
 
 '''
-ANSWER largest category by unique products in it: Condiments
+ANSWER largest category by unique products in it: Confections
 '''
-
-#!/usr/env/bin Python
-import sqlite3
 
 # Open connection to new blank database file
 conn = sqlite3.connect('northwind_small.sqlite3')
@@ -48,9 +46,7 @@ curs.execute('SELECT ProductName FROM Product ORDER BY UnitPrice DESC LIMIT 10;'
 print(f'\n 10 most expensive products')
 product_list = curs.fetchall()
 for i in range(len(product_list)):
-    print(f'{i+1}: {product_list[i][0]}')
-
-# print(f'10 most expensive: {curs.fetchall()[0]}')
+    print(f'{i + 1}: {product_list[i][0]}')
 
 # Average age of employee at time of hiring
 curs.execute('SELECT AVG(HireDate - BirthDate) FROM Employee;')
@@ -58,10 +54,15 @@ print(f'\n Average age at time of hiring: {curs.fetchall()[0][0]:.2f}')
 
 # (Stretch) average age of employee at hire by city
 average_age_by_city = """
-SELECT AVG(HireDate - BirthDate)
+SELECT City, AVG(HireDate - BirthDate)
 FROM Employee
 GROUP BY City
 """
+curs.execute(average_age_by_city)
+age_by_city = curs.fetchall()
+print('\nAverage age of employee at hire by city')
+for city, age in zip(age_by_city, age_by_city):
+    print(f'{city[0]} {age[1]}')
 
 # 10 most expensive items and their suppliers
 most_expensive_items_and_suppliers = """
@@ -78,11 +79,11 @@ curs.execute(most_expensive_items_and_suppliers)
 print(f'\n 10 most expensive with suppliers')
 product_supplier_list = curs.fetchall()
 for i in range(len(product_supplier_list)):
-    print(f'{i+1}: {product_supplier_list[i][0]}, {product_supplier_list[i][1]}')
+    print(f'{i + 1}: {product_supplier_list[i][0]}, {product_supplier_list[i][1]}')
 
-# Pythonic looping over a list
+# Same as above, but Pythonic looping over a list
 print('\n')
-print('...printed Pythonic (?) using zip list')
+print('...printed more Pythonic using zip list')
 for product, supplier in zip(product_supplier_list, product_supplier_list):
     print(f'{product[0]}, {supplier[1]}')
 
@@ -102,3 +103,16 @@ ORDER BY 2 DESC
 """
 curs.execute(largest_category)
 print(f'\n Largest category by unique products: {curs.fetchall()[0][0]}\n')
+
+# (Stretch) employee with the most territories
+most_territories = """
+SELECT b.LastName AS Name, COUNT(*) AS Territories
+FROM EmployeeTerritory a, Employee b
+WHERE a.EmployeeId = b.Id
+GROUP BY EmployeeId
+ORDER BY Territories DESC LIMIT 1;
+"""
+curs.execute(most_territories)
+employee = curs.fetchall()
+# .fetchone()
+print(f'\n Employee {employee[0][0]} has most territories ({employee[0][1]})')
